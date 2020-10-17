@@ -1,6 +1,7 @@
 import React from 'react';
+import '../styles/search-box.style.css';
 
 export const Search = props => {
     const {placeholder, handler} = props;
-    return <input type="search" placeholder={placeholder} onChange={handler}/>
+    return <input className="search" type="search" placeholder={placeholder} onChange={handler}/>
     }

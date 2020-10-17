@@ -10,7 +10,8 @@ class App extends Component{
     this.state = {
       monsters: [
       ],
-      searchField: ""
+      searchField: "",
+      placeholder: "Search monster"
     }
   }
   componentDidMount(){
@@ -18,12 +19,16 @@ class App extends Component{
     then(response => response.json()).
     then(users => this.setState({monsters: users}))
   }
+  handleQuery = (e) => {
+    this.setState({searchField: e.target.value});
+  }
   render(){
     const {monsters, searchField} = this.state;
-    const filteredMonsters = monsters.filter(monster => monster.name.toLowerCase().includes(searchField));
+    const filteredMonsters = monsters.filter(monster => monster.name.toLowerCase().includes(searchField.toLowerCase()));
     return(
       <div className="App">
-        <Search placeholder="Search monster" handler={e => this.setState({searchField: e.target.value})}/>
+        <h1>Monsters rolodex</h1>
+        <Search placeholder={this.state.placeholder} handler={this.handleQuery}/>
         <CardList monsters={filteredMonsters}/>
     </div>
     )
